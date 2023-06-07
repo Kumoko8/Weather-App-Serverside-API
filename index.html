@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Check The Weather</title>
 </head>
 <body>
     <header>  
-        <h1>Current Weather</h1>
-        <h2> Weather Forecast</h2>
+        <h1> Weather Forecast</h1>
     </header>
+    <section>
+        <h2>Current Weather</h2>
+            <section id="current-weather">
+
+            </section>
+    </section>
+    <section>
+        <h2>5 Day Forecast</h2>
+            <section id="five-day">
+                <!-- <div>
+                    <div>Date</div>
+                    <div>temp</div>
+                    <div>wind</div>
+                </div> -->
+            </section>
+    </section>
    <section>
-    <input type="text" placeholder="Search City"> 
+    <input id="city-input" type="text" placeholder="Search City"> 
     <button id="search-btn" type="submit">Search</button>
    </section>
 
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
