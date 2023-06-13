@@ -24,15 +24,26 @@ function getForecast(lat, lon){
           for (var i = 0; i < data.list.length; i=i+8) {
             var forecastBlock = document.createElement('div');
             var dateEl = document.createElement('div');
-            dateEl.textContent = data.list[i].dt_txt;
+            var forecastDate = data.list[i].dt_txt;
+            dateEl.textContent = forecastDate;
             var tempEl = document.createElement('div');
-            tempEl.textContent = 'Temp:' + data.list[i].main.temp
+            var forecastTemp = 'Temp:' + data.list[i].main.temp + '\u00B0F'
+            tempEl.textContent = forecastTemp;
             var windEl = document.createElement('div');
-            windEl.textContent = 'Wind:' + data.list[i].wind.speed
+            var forecastWind = 'Wind:' + data.list[i].wind.speed + 'mph'
+            windEl.textContent = forecastWind;
             forecastBlock.appendChild(dateEl);
             forecastBlock.appendChild(tempEl);
             forecastBlock.appendChild(windEl);
             fiveDayEl.appendChild(forecastBlock)
+            
+          }
+          for (let i = 0; i < data.list.length; i=i+8) {
+            localStorage.setItem("forecast date"[i], forecastDate[i]);
+            // (localStorage.setItem(localStorage.key(i)));
+          
+          // localStorage.setItem("forecast temp", forecastTemp);
+          // localStorage.setItem("forecast wind", forecastWind);
           }
           });
         } else {
@@ -49,17 +60,24 @@ function getCurrentWeather (lat, lon){
       var nameEl = document.createElement('div');
       nameEl.textContent = data.name
       var feelEl = document.createElement('div');
-      feelEl.textContent = data.main.feels_like;
+      var feelsLike = 'Feels Like:' + data.main.feels_like + '\u00B0F'
+      feelEl.textContent = feelsLike;
       var tempEl = document.createElement('div');
-      tempEl.textContent = data.main.temp;
+      var currentTemp = 'Current Temp:' + data.main.temp + '\u00B0F'
+      tempEl.textContent = currentTemp;
       var windEl = document.createElement('div');
-      windEl.textContent = data.wind.speed;
+      var windSpeed = 'Wind:' + data.wind.speed + 'mph';
+      windEl.textContent = windSpeed;
       currentWeatherEl.appendChild(currentWeatherBlock);
       currentWeatherBlock.appendChild(nameEl);
       currentWeatherBlock.appendChild(feelEl);
       currentWeatherBlock.appendChild(tempEl);
       currentWeatherBlock.appendChild(windEl);
-      console.log(data);
+      localStorage.setItem("current name", data.name);
+      localStorage.setItem("current feel", feelsLike);
+      localStorage.setItem("current temp", currentTemp);
+      localStorage.setItem("current wind", windSpeed);
+
       })
     }
 })
