@@ -1,9 +1,9 @@
 const apiKey = "06749fe30c18e7dfb4329c7f75e760bc";
-
 var currentWeatherEl = document.querySelector("#current-weather");
 var fiveDayEl = document.querySelector("#five-day");
 var searchButton = document.querySelector("#search-btn");
- 
+var addHistoryBtn = document.querySelector("#history-btn")
+var savedCities = [ ]
 //set the API key as a function to use for all API calls
 // use async functions for the weather APIs
 //use dayjs to format the date
@@ -18,8 +18,8 @@ function getForecast(lat, lon){
         fetch(api).then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-          var dayOne = data.list[0]
-          console.log(dayOne);
+          // var dayOne = data.list[0]
+        
           
           for (var i = 0; i < data.list.length; i=i+8) {
             var forecastBlock = document.createElement('div');
@@ -38,13 +38,7 @@ function getForecast(lat, lon){
             fiveDayEl.appendChild(forecastBlock)
             
           }
-          for (let i = 0; i < data.list.length; i=i+8) {
-            localStorage.setItem("forecast date"[i], forecastDate[i]);
-            // (localStorage.setItem(localStorage.key(i)));
-          
-          // localStorage.setItem("forecast temp", forecastTemp);
-          // localStorage.setItem("forecast wind", forecastWind);
-          }
+        
           });
         } else {
           alert("Error");
@@ -82,7 +76,18 @@ function getCurrentWeather (lat, lon){
     }
 })
 };
-    
+
+//need to make a function that saves the city name and coordinates to local storage
+
+function setHistory (cityInput, lat, lon) {
+  let cityInfo = {
+    "name":cityInput,
+    "lat":lat,
+    "lon":lon
+  }
+  savedCities.push(cityInfo)
+   localStorage.setItem("history", JSON.stringify(savedCities));
+};
 
 function getCoordinates(){
     var cityInput = document.getElementById("city-input").value 
@@ -95,9 +100,10 @@ function getCoordinates(){
          var lon = data[0].lon
          getForecast(lat, lon)
          getCurrentWeather(lat, lon)
-         var stateEl = document.createElement('div');
+         setHistory(cityInput, lat, lon)
+         
+        //  var stateEl = document.createElement('div');
          //include the state next to the city
-         console.log(data);
           });
         } else {
           alert("Please type a city");
@@ -106,5 +112,13 @@ function getCoordinates(){
       });
 }
 
+// saveToLocal
+// saveBtn.addEventListener("click", function(){
+//   savedCharacters = JSON.parse(localStorage.getItem("characters"))||[]
+//   let character = characterProfile
+//   savedCharacters.push(character)
+//   console.log(savedCharacters);
+//   localStorage.setItem("characters", JSON.stringify(savedCharacters))
 
 searchButton.addEventListener("click", getCoordinates);
+
