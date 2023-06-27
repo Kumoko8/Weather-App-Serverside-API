@@ -2,7 +2,7 @@ const apiKey = "06749fe30c18e7dfb4329c7f75e760bc";
 var currentWeatherEl = document.querySelector("#current-weather");
 var fiveDayEl = document.querySelector("#five-day");
 var searchButton = document.querySelector("#search-btn");
-var addHistoryBtn = document.querySelector("#history-btn")
+var historyBtn = document.querySelector("#hist")
 var savedCities = [ ]
 //set the API key as a function to use for all API calls
 // use async functions for the weather APIs
@@ -12,6 +12,22 @@ var savedCities = [ ]
 //need the get coordinates api
 //need the current weather api (replace locationo I think with weather)
 //var date = dayjs(data.dt_txt).format("M/D h:mm a");
+
+function renderHistory (){
+  var historyItem = JSON.parse(localStorage.getItem("history"))
+  if(historyItem){
+    for (let i = 0; i < historyItem.length; i++) {
+      var historyEl = document.createElement("button")
+      historyEl.innerHTML = historyItem[i].name
+      historyBtn.appendChild(historyEl)
+    //   console.log("it works")
+      }
+    }
+    else {
+      return
+    }
+}
+
 
 function getForecast(lat, lon){
     const api = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
@@ -67,10 +83,6 @@ function getCurrentWeather (lat, lon){
       currentWeatherBlock.appendChild(feelEl);
       currentWeatherBlock.appendChild(tempEl);
       currentWeatherBlock.appendChild(windEl);
-      localStorage.setItem("current name", data.name);
-      localStorage.setItem("current feel", feelsLike);
-      localStorage.setItem("current temp", currentTemp);
-      localStorage.setItem("current wind", windSpeed);
 
       })
     }
@@ -87,7 +99,12 @@ function setHistory (cityInput, lat, lon) {
   }
   savedCities.push(cityInfo)
    localStorage.setItem("history", JSON.stringify(savedCities));
+   
+
+   
 };
+
+
 
 function getCoordinates(){
     var cityInput = document.getElementById("city-input").value 
@@ -101,7 +118,6 @@ function getCoordinates(){
          getForecast(lat, lon)
          getCurrentWeather(lat, lon)
          setHistory(cityInput, lat, lon)
-         
         //  var stateEl = document.createElement('div');
          //include the state next to the city
           });
@@ -112,13 +128,18 @@ function getCoordinates(){
       });
 }
 
-// saveToLocal
-// saveBtn.addEventListener("click", function(){
-//   savedCharacters = JSON.parse(localStorage.getItem("characters"))||[]
-//   let character = characterProfile
-//   savedCharacters.push(character)
-//   console.log(savedCharacters);
-//   localStorage.setItem("characters", JSON.stringify(savedCharacters))
+//Need a function that saves and displays each search data to the history section
+//on click create button with name of city as label
+//for loop?
+
+//when button is clicked the data from city and coordinates are displayed again on the page
+
 
 searchButton.addEventListener("click", getCoordinates);
 
+  ;
+
+
+  
+  
+renderHistory()
