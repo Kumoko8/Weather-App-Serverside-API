@@ -13,16 +13,15 @@ var savedCities = [ ]
 //need the current weather api (replace locationo I think with weather)
 //var date = dayjs(data.dt_txt).format("M/D h:mm a");
 
-function renderHistory (){
+function renderHistory (cityInput){
   var historyItem = JSON.parse(localStorage.getItem("history"))
   if(historyItem){
-    for (let i = 0; i < historyItem.length; i++) {
+    // for (let i = 0; i < historyItem.length; i++) {
       var historyEl = document.createElement("button")
-      historyEl.innerHTML = historyItem[i].name
+      historyEl.innerHTML = cityInput
       historyBtn.appendChild(historyEl)
-    //   console.log("it works")
       }
-    }
+    
     else {
       return
     }
@@ -118,6 +117,7 @@ function getCoordinates(){
          getForecast(lat, lon)
          getCurrentWeather(lat, lon)
          setHistory(cityInput, lat, lon)
+         renderHistory(cityInput)
         //  var stateEl = document.createElement('div');
          //include the state next to the city
           });
@@ -142,4 +142,4 @@ searchButton.addEventListener("click", getCoordinates);
 
   
   
-renderHistory()
+
