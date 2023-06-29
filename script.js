@@ -2,8 +2,9 @@ const apiKey = "06749fe30c18e7dfb4329c7f75e760bc";
 var currentWeatherEl = document.querySelector("#current-weather");
 var fiveDayEl = document.querySelector("#five-day");
 var searchButton = document.querySelector("#search-btn");
-var historyBtn = document.querySelector("#hist")
+var history = document.querySelector("#hist")
 var savedCities = [ ]
+var historyEl = document.createElement("button")
 //set the API key as a function to use for all API calls
 // use async functions for the weather APIs
 //use dayjs to format the date
@@ -15,18 +16,22 @@ var savedCities = [ ]
 
 function renderHistory (cityInput){
   var historyItem = JSON.parse(localStorage.getItem("history"))
-  if(historyItem){
-    // for (let i = 0; i < historyItem.length; i++) {
+  if(historyItem.length > 0){
+     for (let i = 0; i < historyItem.length; i++) {
       var historyEl = document.createElement("button")
-      historyEl.innerHTML = cityInput
-      historyBtn.appendChild(historyEl)
+      historyEl.innerHTML = cityInput;
+      history.appendChild(historyEl)
+      activateHistory();
       }
-    
+    }
     else {
       return
     }
 }
+function activateHistory (historyEl) {
+  historyEl.onclick = function () {getCoordinates(historyEl) }
 
+  }
 
 function getForecast(lat, lon){
     const api = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
@@ -108,6 +113,8 @@ function setHistory (cityInput, lat, lon) {
 function getCoordinates(){
     var cityInput = document.getElementById("city-input").value 
     const api = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=1&appid=" + apiKey
+    currentWeatherEl.innerHTML = ""
+    fiveDayEl.innerHTML = ""
         //get value from input
     fetch(api).then(function (response) {
         if (response.ok) {
@@ -136,6 +143,7 @@ function getCoordinates(){
 
 
 searchButton.addEventListener("click", getCoordinates);
+historyEl.addEventListener("click", getCoordinates);
 
   ;
 
