@@ -2,9 +2,9 @@ const apiKey = "06749fe30c18e7dfb4329c7f75e760bc";
 var currentWeatherEl = document.querySelector("#current-weather");
 var fiveDayEl = document.querySelector("#five-day");
 var searchButton = document.querySelector("#search-btn");
-var history = document.querySelector("#hist")
+var historyBlock = document.querySelector("#hist");
 var savedCities = [ ]
-var historyEl = document.createElement("button")
+
 //set the API key as a function to use for all API calls
 // use async functions for the weather APIs
 //use dayjs to format the date
@@ -14,24 +14,36 @@ var historyEl = document.createElement("button")
 //need the current weather api (replace locationo I think with weather)
 //var date = dayjs(data.dt_txt).format("M/D h:mm a");
 
-function renderHistory (cityInput){
+function renderHistory (){
   var historyItem = JSON.parse(localStorage.getItem("history"))
-  if(historyItem.length > 0){
-     for (let i = 0; i < historyItem.length; i++) {
-      var historyEl = document.createElement("button")
-      historyEl.innerHTML = cityInput;
-      history.appendChild(historyEl)
-      activateHistory();
-      }
-    }
-    else {
-      return
-    }
-}
-function activateHistory (historyEl) {
-  historyEl.onclick = function () {getCoordinates(historyEl) }
-
+  historyBlock.innerHTML = ""
+    if (historyItem) {
+      for (let i = 0; i < historyItem.length; i++) {
+        var historyEl = document.createElement("button")
+        historyEl.innerHTML = historyItem[i].name
+        historyBlock.appendChild(historyEl);
+        
   }
+}
+
+  
+  // if(historyItem){
+    
+  //     historyEl.innerHTML = cityInput;
+  //     history.textContent = historyEl;
+  //     // activateHistory();
+  //     // historyBtn();
+  //     }
+    
+  //   else {
+  //     return
+  //   }
+  }
+
+// function activateHistory (historyEl) {
+//   historyEl.onclick = function () {getCoordinates(historyEl) }
+
+//   }
 
 function getForecast(lat, lon){
     const api = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
@@ -124,7 +136,8 @@ function getCoordinates(){
          getForecast(lat, lon)
          getCurrentWeather(lat, lon)
          setHistory(cityInput, lat, lon)
-         renderHistory(cityInput)
+         renderHistory()
+         
         //  var stateEl = document.createElement('div');
          //include the state next to the city
           });
@@ -143,7 +156,11 @@ function getCoordinates(){
 
 
 searchButton.addEventListener("click", getCoordinates);
-historyEl.addEventListener("click", getCoordinates);
+
+// function historyBtn (historyEl) {
+//   historyEl.addEventListener("click", getCoordinates);
+// }
+
 
   ;
 
