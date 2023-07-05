@@ -119,7 +119,7 @@ function setHistory (cityInput, lat, lon) {
 
 function getCoordinates(){
     var cityInput = document.getElementById("city-input").value 
-    const api = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=1&appid=" + apiKey
+    const api = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=1&appid=" + apiKey
     currentWeatherEl.innerHTML = ""
     fiveDayEl.innerHTML = ""
         //get value from input
