@@ -50,7 +50,8 @@ function getForecast(lat, lon){
             var forecastBlock = document.createElement('div');
             var dateEl = document.createElement('div');
             var forecastDate = data.list[i].dt_txt;
-            dateEl.textContent = forecastDate;
+            var today = dayjs(forecastDate).format("dddd MM-DD-YYYY");
+            dateEl.textContent = today;
             var tempEl = document.createElement('div');
             var forecastTemp = 'Temp:' + data.list[i].main.temp + '\u00B0F'
             tempEl.textContent = forecastTemp;
@@ -79,13 +80,13 @@ function getCurrentWeather (lat, lon){
       var nameEl = document.createElement('div');
       nameEl.textContent = data.name
       var feelEl = document.createElement('div');
-      var feelsLike = 'Feels Like:' + data.main.feels_like + '\u00B0F'
+      var feelsLike = 'Feels Like: ' + data.main.feels_like + '\u00B0F'
       feelEl.textContent = feelsLike;
       var tempEl = document.createElement('div');
-      var currentTemp = 'Current Temp:' + data.main.temp + '\u00B0F'
+      var currentTemp = 'Current Temp: ' + data.main.temp + '\u00B0F'
       tempEl.textContent = currentTemp;
       var windEl = document.createElement('div');
-      var windSpeed = 'Wind:' + data.wind.speed + 'mph';
+      var windSpeed = 'Wind: ' + data.wind.speed + 'mph';
       windEl.textContent = windSpeed;
       currentWeatherEl.appendChild(currentWeatherBlock);
       currentWeatherBlock.appendChild(nameEl);
