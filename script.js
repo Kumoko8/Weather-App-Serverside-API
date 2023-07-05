@@ -50,18 +50,21 @@ function getForecast(lat, lon){
             var forecastBlock = document.createElement('div');
             var dateEl = document.createElement('div');
             var forecastDate = data.list[i].dt_txt;
-            var today = dayjs(forecastDate).format("dddd MM-DD-YYYY");
+            var today = dayjs(forecastDate).format("dddd, MM-DD-YYYY");
             dateEl.textContent = today;
             var tempEl = document.createElement('div');
-            var forecastTemp = 'Temp:' + data.list[i].main.temp + '\u00B0F'
+            var forecastTemp = 'Temp: ' + data.list[i].main.temp + '\u00B0F'
             tempEl.textContent = forecastTemp;
             var windEl = document.createElement('div');
-            var forecastWind = 'Wind:' + data.list[i].wind.speed + 'mph'
+            var forecastWind = 'Wind: ' + data.list[i].wind.speed + 'mph'
             windEl.textContent = forecastWind;
             forecastBlock.appendChild(dateEl);
             forecastBlock.appendChild(tempEl);
             forecastBlock.appendChild(windEl);
-            fiveDayEl.appendChild(forecastBlock)
+            forecastBlock.classList.add("forecast");
+            forecastBlock.classList.add("card");
+
+            fiveDayEl.appendChild(forecastBlock);
             
           }
         
@@ -93,7 +96,8 @@ function getCurrentWeather (lat, lon){
       currentWeatherBlock.appendChild(feelEl);
       currentWeatherBlock.appendChild(tempEl);
       currentWeatherBlock.appendChild(windEl);
-
+      currentWeatherBlock.classList.add("current");
+      currentWeatherBlock.classList.add("card");
       })
     }
 })

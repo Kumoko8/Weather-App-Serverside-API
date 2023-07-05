@@ -1,12 +1,19 @@
 :root {
     --aqua: rgb(173, 221, 221);
-    --yellow: rgb(239, 232, 104);
+    --yellow: rgb(246, 227, 116);
+    --lightBlue: rgb(223, 241, 244);
 }
-
-
 
 #hist {
     background-color:var(--aqua);
+}
+
+h1 {
+    color: white;
+    font-size: 350%;
+}
+h1, h2, h4 {
+    padding-left: 2%;
 }
 
 h1, h4 {
@@ -16,4 +23,26 @@ h1, h4 {
 h2 {
     background-color: var(--yellow);
 
+}
+
+.search {
+    margin-left:2%;
+}
+
+.forecast {
+    margin: 2%;
+    display: inline-block;
+}
+
+.current {
+    margin: 2%;
+}
+
+.card {
+    background-color: var(--lightBlue);
+    width: fit-content;
+    border: solid, var(--aqua);
+    border-width: 10px;
+    padding: 2%;
+    border-radius: 50%;
 }
