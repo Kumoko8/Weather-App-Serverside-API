@@ -15,7 +15,7 @@ This project displays the current weather and 5 day forecast for any city recogn
 
 
 # Link to Live Page
-![Check the Weather](https://kumoko8.github.io/Serverside-APIs-Homework-6/)
+https://kumoko8.github.io/Serverside-APIs-Homework-6/
 
 # License
 MIT
