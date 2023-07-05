@@ -116,7 +116,7 @@ function setHistory (cityInput, lat, lon) {
 };
 
 
-
+//changed this to https
 function getCoordinates(){
     var cityInput = document.getElementById("city-input").value 
     const api = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=1&appid=" + apiKey
