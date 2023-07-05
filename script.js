@@ -14,7 +14,7 @@ var savedCities = [ ]
 //need the current weather api (replace locationo I think with weather)
 //var date = dayjs(data.dt_txt).format("M/D h:mm a");
 
-function renderHistory (){
+function renderHistory (cityInfo){
   var historyItem = JSON.parse(localStorage.getItem("history"))
   historyBlock.innerHTML = ""
     if (historyItem) {
@@ -22,28 +22,21 @@ function renderHistory (){
         var historyEl = document.createElement("button")
         historyEl.innerHTML = historyItem[i].name
         historyBlock.appendChild(historyEl);
+        historyEl.addEventListener("click", function() {
+          var newInput = document.getElementById("city-input")
+          newInput.value = historyItem[i].name
+          getCoordinates();
+          
+              })
         
-  }
-}
+          }
+        
+        }
+      
+      }
 
   
-  // if(historyItem){
-    
-  //     historyEl.innerHTML = cityInput;
-  //     history.textContent = historyEl;
-  //     // activateHistory();
-  //     // historyBtn();
-  //     }
-    
-  //   else {
-  //     return
-  //   }
-  }
 
-// function activateHistory (historyEl) {
-//   historyEl.onclick = function () {getCoordinates(historyEl) }
-
-//   }
 
 function getForecast(lat, lon){
     const api = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
@@ -115,9 +108,6 @@ function setHistory (cityInput, lat, lon) {
   }
   savedCities.push(cityInfo)
    localStorage.setItem("history", JSON.stringify(savedCities));
-   
-
-   
 };
 
 
@@ -138,8 +128,6 @@ function getCoordinates(){
          setHistory(cityInput, lat, lon)
          renderHistory()
          
-        //  var stateEl = document.createElement('div');
-         //include the state next to the city
           });
         } else {
           alert("Please type a city");
@@ -148,21 +136,12 @@ function getCoordinates(){
       });
 }
 
-//Need a function that saves and displays each search data to the history section
-//on click create button with name of city as label
-//for loop?
-
-//when button is clicked the data from city and coordinates are displayed again on the page
-
 
 searchButton.addEventListener("click", getCoordinates);
+//For each button I want this function to take the innerHTML of the button
+//which is the name from local storage, and also the lat and long for that
+//name and put that info back into the getCoordinates function and display it
 
-// function historyBtn (historyEl) {
-//   historyEl.addEventListener("click", getCoordinates);
-// }
-
-
-  ;
 
 
   
